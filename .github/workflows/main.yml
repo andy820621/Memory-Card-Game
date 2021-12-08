@@ -1,0 +1,57 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy to Github Pages
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  deploy-to-github-pages:
+    # 使用ubuntu
+    runs-on: ubuntu-latest
+    steps:
+    # 使用checkout actions
+    - uses: actions/checkout@v2
+    
+    # 安裝.NET Core SDK 3.1
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v1.6.0
+      with:
+        dotnet-version: 3.1    
+    
+    # 執行單元測試專案
+    - name: Run Unit Test 
+      run: dotnet test --no-build
+      
+    # 發佈程式到Release資料夾
+    - name: Publish .NET Core Project
+      run: dotnet publish TodoBlazor/TodoBlazor.csproj -c Release -o release --nologo
+    
+    # 修改index.html的base href -- 從"/"改為"/TodoBlazor/"
+    - name: Change base-tag in index.html from / to TodoBlazor
+      run: sed -i 's/<base href="\/" \/>/<base href="\/Memory-Card-Game\/" \/>/g' release/wwwroot/index.html
+    
+    # 複製index.html內容到404.html
+    - name: copy index.html to 404.html
+      run: cp release/wwwroot/index.html release/wwwroot/404.html
+
+    # 加入一個.nojekyll檔案
+    - name: Add .nojekyll file
+      run: touch release/wwwroot/.nojekyll
+    
+    # 將release/wwwroot的程式碼，push到gh-pages分支
+    - name: Commit wwwroot to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@3.5.9
+      with:
+        GITHUB_TOKEN: ${{ secrets.DeployToken }}
+        BRANCH: gh-pages
+        FOLDER: release/wwwroot
