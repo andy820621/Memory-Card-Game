@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Nova+Mono&display=swap');
+
 *,
 *::before,
 *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Nova Mono', monospace;
 }
 body {
     height: 100vh;
@@ -22,6 +25,10 @@ section {
     gap: 2rem;
     perspective: 800px;
     margin-top: 1.4rem;
+}
+h1 {
+    color: azure;
+    text-shadow: 0.1em 0.1em 0.24em rgb(81, 81, 81);
 }
 
 .card {
@@ -42,4 +49,13 @@ section {
 .back {
     background-color: antiquewhite;
     backface-visibility: hidden;
+}
+
+@media (max-width:650px) {
+    section {
+        display: grid;
+        grid-template-columns: repeat(4, 19vw);
+        grid-template-rows: repeat(4, 19vw);
+        gap: 1rem;
+    }
 }
