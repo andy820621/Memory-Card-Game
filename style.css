@@ -1,61 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=Nova+Mono&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nova+Mono&display=swap");
 
 *,
 *::before,
 *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Nova Mono', monospace;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Nova Mono", monospace;
 }
 body {
-    height: 100vh;
-    background-color: rgba(245,177,97,1);
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-image: linear-gradient( 68.3deg,  rgba(245,177,97,1) 0.4%, rgba(236,54,110,1) 100.2% );
+	height: 100vh;
+	background-color: rgba(245, 177, 97, 1);
+	background-repeat: no-repeat;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-image: linear-gradient(
+		68.3deg,
+		rgba(245, 177, 97, 1) 0.4%,
+		rgba(236, 54, 110, 1) 100.2%
+	);
 }
 section {
-    display: grid;
-    grid-template-columns: repeat(4, 8rem);
-    grid-template-rows: repeat(4, 8rem);
-    gap: 2rem;
-    perspective: 800px;
-    margin-top: 1.4rem;
+	display: grid;
+	grid-template-columns: repeat(4, 8rem);
+	grid-template-rows: repeat(4, 8rem);
+	gap: 2rem;
+	perspective: 800px;
+	margin-top: 1.4rem;
 }
 h1 {
-    color: azure;
-    text-shadow: 0.1em 0.1em 0.24em rgb(81, 81, 81);
+	color: azure;
+	text-shadow: 0.1em 0.1em 0.24em rgb(81, 81, 81);
 }
 
 .card {
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform .81s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+	position: relative;
+	transform-style: preserve-3d;
+	transition: transform 0.81s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+.card img {
+	user-select: none;
 }
 .toggleCard {
-    transform: rotateY(180deg);
+	transform: rotateY(180deg);
 }
-.face, .back {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    pointer-events: none;
+.face,
+.back {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	pointer-events: none;
 }
 .back {
-    background-color: antiquewhite;
-    backface-visibility: hidden;
+	background-color: antiquewhite;
+	backface-visibility: hidden;
 }
 
-@media (max-width:650px) {
-    section {
-        display: grid;
-        grid-template-columns: repeat(4, 19vw);
-        grid-template-rows: repeat(4, 19vw);
-        gap: 1rem;
-    }
+@media (max-width: 650px) {
+	section {
+		display: grid;
+		grid-template-columns: repeat(4, 19vw);
+		grid-template-rows: repeat(4, 19vw);
+		gap: 1rem;
+	}
 }
