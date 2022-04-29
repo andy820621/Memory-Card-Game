@@ -78,7 +78,7 @@ const cardGenerator = () => {
 		card.appendChild(back);
 
 		card.addEventListener("click", (e) => {
-			card.classList.toggle("toggleCard");
+			card.classList.add("toggleCard");
 			checkCards(e);
 		});
 	});
